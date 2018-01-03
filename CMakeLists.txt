@@ -9,4 +9,4 @@ file(GLOB SOURCES "src/*.cpp")
 
 include_directories(include)
 
-add_executable(Jilag ${PUBLIC_HEADERS} ${SOURCES})
+add_executable(Jilag ${PUBLIC_HEADERS} ${SOURCES} main.cpp)
