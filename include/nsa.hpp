@@ -7,6 +7,8 @@
 #include <unordered_set>
 #include <set>
 #include <vector>
+#include "state_transition_table.hpp"
+
 namespace jilag {
 
 typedef int symbol_t;
@@ -46,7 +48,7 @@ private:
   state_t *current_;
   bool free_pointers_;
   bool allow_change_;
-  void remove_unreachible();
+  void remove_unreachable();
 
 public:
   NSA();
@@ -65,7 +67,8 @@ public:
 
   NSA &remove_epsilons();
 
-  void determine();
+  __internal::__state_translation_table
+  __attribute__((visibility("hidden"))) make_translation_table_() const;
 };
 
 } // namespace jilag

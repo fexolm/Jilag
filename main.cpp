@@ -1,5 +1,17 @@
 #include <iostream>
 #include "nsa.hpp"
+#include "dsa.hpp"
+#include <string>
+
+bool check_string(jilag::DSA &dsa, const std::string &str) {
+  dsa.reset();
+  bool correct = true;
+  for (int i = 0; correct && i < str.length(); i++) {
+    correct = dsa.move(str[i]);
+  }
+  return correct && dsa.final();
+}
+
 int main() {
   jilag::NSA nsa;
 
@@ -39,6 +51,19 @@ int main() {
 
   nsa.remove_epsilons();
 
-  nsa.determine();
+  jilag::DSA dsa = jilag::DSA::build_from_nsa(nsa);
+
+  std::cout << check_string(dsa, "ab") << std::endl;
+
+  std::cout << check_string(dsa, "abrcd") << std::endl;
+
+  std::cout << check_string(dsa, "abek") << std::endl;
+
+  std::cout << check_string(dsa, "abcd") << std::endl;
+
+  std::cout << check_string(dsa, "abcdekcd") << std::endl;
+
+  std::cout << check_string(dsa, "abrcdcd") << std::endl;
+
   return 0;
 }

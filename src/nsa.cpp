@@ -166,48 +166,59 @@ NSA &NSA::remove_epsilons() {
   for (auto &s : states_) {
     s->remove_epsilons();
   }
-  remove_unreachible();
+  remove_unreachable();
 }
-void NSA::determine() {
+__internal::__state_translation_table NSA::make_translation_table_() const {
   int current = 0;
   __internal::__IndexTree used;
   std::vector<std::vector<state_t *>> states;
   std::vector<std::map<symbol_t, int>> ksa_table;
   states.push_back({begin_});
-  used.get_index({begin_}); // 0
+  used.get_index({begin_}); //x0
   ksa_table.push_back(std::map<symbol_t, int>());
   std::set<int> finals;
   while (current!=states.size()) {
+    // all symbols containing in current state set
     std::unordered_set<symbol_t> symbols;
     for (auto &state : states[current]) {
       auto &possible = state->possible_symbols();
       symbols.insert(possible.begin(), possible.end());
     }
+    // get sets of states reachable from current state set by each symbol
+    // if there are new sets of states, push them to states vector
+    // new state is final if it contains at least one final state
     for (auto symbol : symbols) {
       std::set<__internal::__NSA_State::ptr_t> nstate;
       bool final = false;
       for (auto state : states[current]) {
-        if (state->final())
-          final = true;
         if (state->possible_symbols().count(symbol)) {
-          auto can_move = state->get(symbol);
-          nstate.insert(can_move.begin(), can_move.end());
+          auto can_move_to = state->get(symbol);
+          nstate.insert(can_move_to.begin(), can_move_to.end());
+          final = final ||
+              std::find_if(nstate.begin(), nstate.end(), [](auto st) {
+                return st->final();
+              })!=nstate.end();
         }
       }
-      std::vector<__internal::__NSA_State::ptr_t> nstate_t(nstate.begin(), nstate.end());
-      int index = used.get_index(nstate_t);
+      std::vector<__internal::__NSA_State::ptr_t> nstate_v(nstate.begin(), nstate.end());
+      int index = used.get_index(nstate_v);
       if (index==states.size()) {
-        if (final)
+        if (final) {
           finals.insert(index);
-        states.push_back(nstate_t);
+        }
+        states.push_back(nstate_v);
         ksa_table.push_back(std::map<symbol_t, int>());
       }
       ksa_table[current][symbol] = index;
     }
     current++;
   }
+  __internal::__state_translation_table result;
+  result.states = std::move(ksa_table);
+  result.finals = std::move(finals);
+  return result;
 }
-void NSA::remove_unreachible() {
+void NSA::remove_unreachable() {
   std::unordered_set<state_t *> visited;
   std::stack<state_t *> to_visit;
   to_visit.push(begin_);
@@ -225,7 +236,11 @@ void NSA::remove_unreachible() {
 
   // FIXME "-> bool" used just to avoid ide warnings
   states_.erase(std::remove_if(states_.begin(), states_.end(), [&visited](auto &state) -> bool {
-    return visited.count(state)==0;
+    if (visited.count(state)==0) {
+      delete state;
+      return true;
+    }
+    return false;
   }), states_.end());
 }
 
