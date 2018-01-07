@@ -1,0 +1,5 @@
+* move FSA to individual lib
+
+* refactor internals
+
+* write tests
