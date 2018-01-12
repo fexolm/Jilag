@@ -1,3 +1,5 @@
+* minimize
+
 * move FSA to individual lib
 
 * refactor internals

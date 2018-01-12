@@ -21,6 +21,7 @@ __NSA_State &__NSA_State::add(symbol_t symbol, const_ptr_t state) {
 const __NSA_State::set_t &__NSA_State::get(symbol_t symbol) {
   return symbol_map_[symbol];
 }
+
 void __NSA_State::remove_epsilons() {
   chache_changed_ = true;
   if (symbol_map_.count(epsilon)) {
@@ -51,12 +52,15 @@ void __NSA_State::remove_epsilons() {
     }
   }
 }
+
 void __NSA_State::make_final() {
   final_ = true;
 }
+
 bool __NSA_State::final() const {
   return final_;
 }
+
 const std::set<symbol_t> &__NSA_State::possible_symbols() const {
   if (chache_changed_) {
     chache_changed_ = false;
@@ -67,6 +71,7 @@ const std::set<symbol_t> &__NSA_State::possible_symbols() const {
   }
   return possible_symbols_chache_;
 }
+
 const std::set<__NSA_State *> __NSA_State::conneted_with() const {
   std::set<__NSA_State *> result;
   for (auto s : symbol_map_) {
@@ -74,7 +79,9 @@ const std::set<__NSA_State *> __NSA_State::conneted_with() const {
   }
   return result;
 }
+
 } // namespace __internal
+
 NSA::NSA() :
     begin_(new state_t),
     end_(new state_t),
@@ -85,6 +92,7 @@ NSA::NSA() :
   states_.push_back(end_);
   begin_->add(epsilon, end_);
 }
+
 NSA::NSA(NSA &&rhs) :
     begin_(rhs.begin_),
     end_(rhs.end_),
@@ -92,6 +100,7 @@ NSA::NSA(NSA &&rhs) :
     allow_change_(rhs.allow_change_) {
   rhs.free_pointers_ = false;
 }
+
 NSA &NSA::operator=(NSA &&rhs) {
   begin_ = rhs.begin_;
   end_ = rhs.end_;
@@ -100,6 +109,7 @@ NSA &NSA::operator=(NSA &&rhs) {
   rhs.free_pointers_ = false;
   return *this;
 }
+
 NSA::~NSA() {
   if (free_pointers_) {
     for (auto &s: states_) {
@@ -107,6 +117,7 @@ NSA::~NSA() {
     }
   }
 }
+
 NSA &NSA::push_back(symbol_t symbol) {
   if (!allow_change_)
     throw;
@@ -116,6 +127,7 @@ NSA &NSA::push_back(symbol_t symbol) {
   end_ = state;
   return *this;
 }
+
 NSA &NSA::push_back(NSA &&rhs) {
   if (!allow_change_)
     throw;
@@ -125,6 +137,7 @@ NSA &NSA::push_back(NSA &&rhs) {
   end_ = rhs.end_;
   return *this;
 }
+
 NSA &NSA::add_union(std::vector<NSA> &v) {
   if (!allow_change_)
     throw;
@@ -143,6 +156,7 @@ NSA &NSA::add_union(std::vector<NSA> &v) {
   end_ = end_state;
   return *this;
 }
+
 NSA &NSA::make_kleene_closure() {
   if (!allow_change_)
     throw;
@@ -158,6 +172,7 @@ NSA &NSA::make_kleene_closure() {
   states_.push_back(nbegin);
   return *this;
 }
+
 NSA &NSA::remove_epsilons() {
   if (!allow_change_)
     throw;
@@ -168,6 +183,7 @@ NSA &NSA::remove_epsilons() {
   }
   remove_unreachable();
 }
+
 __internal::__state_translation_table NSA::make_translation_table_() const {
   int current = 0;
   __internal::__IndexTree used;
@@ -218,6 +234,7 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
   result.finals = std::move(finals);
   return result;
 }
+
 void NSA::remove_unreachable() {
   std::unordered_set<state_t *> visited;
   std::stack<state_t *> to_visit;
@@ -233,9 +250,7 @@ void NSA::remove_unreachable() {
       }
     }
   }
-
-  // FIXME "-> bool" used just to avoid ide warnings
-  states_.erase(std::remove_if(states_.begin(), states_.end(), [&visited](auto &state) -> bool {
+  states_.erase(std::remove_if(states_.begin(), states_.end(), [&visited](auto &state) {
     if (visited.count(state)==0) {
       delete state;
       return true;
