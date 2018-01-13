@@ -1,0 +1,11 @@
+cmake_minimum_required(VERSION 3.8)
+
+project(libfsa.test)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_executable(main_test main.cpp)
+
+target_link_libraries(main_test libfsa)
+
+add_test()

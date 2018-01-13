@@ -1,8 +1,6 @@
-#include <iostream>
+#include <boost/test/unit_test.hpp>
 #include "nsa.hpp"
 #include "dsa.hpp"
-#include <string>
-
 bool check_string(jilag::DSA &dsa, const std::string &str) {
   dsa.reset();
   bool correct = true;
@@ -12,7 +10,9 @@ bool check_string(jilag::DSA &dsa, const std::string &str) {
   return correct && dsa.final();
 }
 
-int main() {
+BOOST_AUTO_TEST_SUITE(main_suite)
+
+BOOST_AUTO_TEST_CASE (main_test) {
   jilag::NSA nsa;
 
   nsa.push_back(int('a'));
@@ -53,17 +53,17 @@ int main() {
 
   jilag::DSA dsa = jilag::DSA::build_from_nsa(nsa);
 
-  std::cout << check_string(dsa, "ab") << std::endl;
+  BOOST_CHECK(check_string(dsa, "ab"));
 
-  std::cout << check_string(dsa, "abrcd") << std::endl;
+  BOOST_CHECK(check_string(dsa, "abrcd"));
 
-  std::cout << check_string(dsa, "abek") << std::endl;
+  BOOST_CHECK(check_string(dsa, "abek"));
 
-  std::cout << check_string(dsa, "abcd") << std::endl;
+  BOOST_CHECK(check_string(dsa, "abcd"));
 
-  std::cout << check_string(dsa, "abcdekcd") << std::endl;
+  BOOST_CHECK(check_string(dsa, "abcdekcd"));
 
-  std::cout << check_string(dsa, "abrcdcd") << std::endl;
-
-  return 0;
+  BOOST_CHECK(!check_string(dsa, "abrcdcd"));
 }
+
+BOOST_AUTO_TEST_SUITE_END()

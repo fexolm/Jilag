@@ -4,9 +4,7 @@ project(Jilag)
 
 set(CMAKE_CXX_STANDARD 14)
 
-file(GLOB PUBLIC_HEADERS "include/*.hpp")
-file(GLOB SOURCES "src/*.cpp")
+enable_testing()
 
-include_directories(include)
-
-add_executable(Jilag ${PUBLIC_HEADERS} ${SOURCES} main.cpp)
+add_subdirectory(libfsa)
+add_subdirectory(tests)
