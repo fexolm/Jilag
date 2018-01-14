@@ -182,6 +182,7 @@ NSA &NSA::remove_epsilons() {
     s->remove_epsilons();
   }
   remove_unreachable();
+  return *this;
 }
 
 __internal::__state_translation_table NSA::make_translation_table_() const {
@@ -257,6 +258,13 @@ void NSA::remove_unreachable() {
     }
     return false;
   }), states_.end());
+}
+NSA &NSA::alternative_branch(NSA &&nsa) {
+  nsa.free_pointers_ = false;
+  states_.insert(states_.end(), nsa.states_.begin(), nsa.states_.end());
+  begin_->add(epsilon, nsa.begin_);
+  nsa.end_->add(epsilon, end_);
+  return *this;
 }
 
 } // namespace jilag

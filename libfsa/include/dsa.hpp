@@ -33,7 +33,11 @@ private:
   state_t *current_;
   DSA();
 public:
-  ~DSA();
+  DSA(const DSA &) = default;
+  DSA &operator=(const DSA &) = default;
+  DSA(DSA &&) = default;
+  DSA &operator=(DSA &&) = default;
+  virtual ~DSA();
   static DSA build_from_nsa(const NSA &);
 
   bool move(symbol_t);

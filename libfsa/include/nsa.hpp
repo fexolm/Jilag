@@ -67,6 +67,8 @@ public:
 
   NSA &remove_epsilons();
 
+  NSA &alternative_branch(NSA &&);
+
   __internal::__state_translation_table
   __attribute__((visibility("hidden"))) make_translation_table_() const;
 };

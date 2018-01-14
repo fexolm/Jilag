@@ -10,8 +10,8 @@ find_package (Boost COMPONENTS unit_test_framework REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(fsa fsa.cpp)
+add_executable(fsa_test fsa.cpp)
 
-target_link_libraries(fsa libfsa ${Boost_LIBRARIES})
+target_link_libraries(fsa_test fsa ${Boost_LIBRARIES})
 
-add_test(fsa_test fsa)
+add_test(fsa_test fsa_test)

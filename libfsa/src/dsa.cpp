@@ -36,7 +36,7 @@ void __DSA_State::add_symbol(int s, __DSA_State *state) {
 }
 
 __DSA_State::__DSA_State()
-    : cache_valid_(false) {}
+    : final_(false), cache_valid_(false) {}
 
 } // namespace __internal
 
@@ -71,6 +71,7 @@ bool DSA::move(symbol_t symbol) {
     return false;
   }
   current_ = next;
+  return true;
 }
 bool DSA::final() const {
   return current_->final();
