@@ -1,7 +1,7 @@
 * minimize
 
-* move FSA to individual lib
-
+* move FSA to individual lib -- DONE
+ 
 * refactor internals
 
-* write tests
+* write tests -- IN PROGRESS

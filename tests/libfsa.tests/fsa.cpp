@@ -10,9 +10,9 @@ bool check_string(jilag::DSA &dsa, const std::string &str) {
   return correct && dsa.final();
 }
 
-BOOST_AUTO_TEST_SUITE(main_suite)
+BOOST_AUTO_TEST_SUITE(fsa_test)
 
-BOOST_AUTO_TEST_CASE (main_test) {
+BOOST_AUTO_TEST_CASE (test1) {
   jilag::NSA nsa;
 
   nsa.push_back(int('a'));

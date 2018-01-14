@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 
 project(libfsa.test)
 
@@ -10,10 +10,8 @@ find_package (Boost COMPONENTS unit_test_framework REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
+add_executable(fsa fsa.cpp)
 
-add_executable(main_test main.cpp)
+target_link_libraries(fsa libfsa ${Boost_LIBRARIES})
 
-target_link_libraries(main_test libfsa ${Boost_LIBRARIES})
-
-enable_testing ()
-add_test(main main_test)
+add_test(fsa_test fsa)
