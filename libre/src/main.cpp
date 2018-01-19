@@ -3,7 +3,7 @@
 //
 #include <string>
 #include <sstream>
-#include "parser.hpp"
+#include "parser2.hpp"
 
 bool check_string(jilag::DSA &dsa, const std::string &str) {
   dsa.reset();
@@ -18,7 +18,7 @@ int main() {
   std::string s = "abc(kek|lel)*";
   std::stringstream ss;
   ss << s;
-  Parser p;
+  Parser2 p;
   auto dsa = p.parse(ss);
 
   std::cout << check_string(dsa, "abc");
