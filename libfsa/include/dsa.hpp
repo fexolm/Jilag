@@ -32,9 +32,11 @@ private:
   state_t *first_;
   state_t *current_;
   DSA();
+  std::vector<state_t *> copy_states(const DSA &) const;
+  void dfs_copy(std::map<intptr_t, state_t *> &used, state_t *start) const;
 public:
-  DSA(const DSA &) = default;
-  DSA &operator=(const DSA &) = default;
+  DSA(const DSA &);
+  DSA &operator=(const DSA &);
   DSA(DSA &&) = default;
   DSA &operator=(DSA &&) = default;
   virtual ~DSA();

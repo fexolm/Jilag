@@ -3,6 +3,7 @@
 //
 
 #include "dsa.hpp"
+#include <algorithm>
 
 namespace jilag {
 
@@ -41,6 +42,19 @@ __DSA_State::__DSA_State()
 } // namespace __internal
 
 DSA::DSA() : current_(0) {}
+
+DSA::DSA(const DSA &rhs) {
+  states_ = copy_states(rhs);
+  first_ = states_[0];
+  current_ = states_[0];
+}
+
+DSA &DSA::operator=(const DSA &rhs) {
+  states_ = copy_states(rhs);
+  first_ = states_[0];
+  current_ = states_[0];
+  return *this;
+}
 
 DSA DSA::build_from_nsa(const NSA &nsa) {
   auto table = nsa.make_translation_table_();
@@ -82,6 +96,29 @@ void DSA::reset() {
 DSA::~DSA() {
   for (auto &s : states_) {
     delete s;
+  }
+}
+std::vector<DSA::state_t *> DSA::copy_states(const DSA &rhs) const {
+  std::map<intptr_t, DSA::state_t *> used;
+  dfs_copy(used, rhs.first_);
+  std::vector<DSA::state_t *> result;
+  std::transform(used.begin(), used.end(), std::back_inserter(result), [](auto kv) {
+    return kv.second;
+  });
+  return result;
+}
+void DSA::dfs_copy(std::map<intptr_t, state_t *> &used, DSA::state_t *start) const {
+  intptr_t ind = reinterpret_cast<intptr_t >(start);
+  if (used.count(ind))
+    return;
+  auto state = new DSA::state_t;
+  state->final() = start->final();
+  used[ind] = state;
+
+  for (auto sy : start->symbols()) {
+    auto to = start->from_symbol(sy);
+    dfs_copy(used, to);
+    state->add_symbol(sy, used[reinterpret_cast<intptr_t >(to)]);
   }
 }
 } // namespace jilag

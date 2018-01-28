@@ -29,6 +29,12 @@ BOOST_AUTO_TEST_CASE(test2) {
   BOOST_CHECK(check_string(dsa, "343212acacba"));
   BOOST_CHECK(check_string(dsa, "aabbccacba"));
   BOOST_CHECK(!check_string(dsa, "aabbc123cacba"));
+
+  auto dsa2(dsa);
+  BOOST_CHECK(check_string(dsa2, "012343212aabbccacba"));
+  BOOST_CHECK(check_string(dsa2, "343212acacba"));
+  BOOST_CHECK(check_string(dsa2, "aabbccacba"));
+  BOOST_CHECK(!check_string(dsa2, "aabbc123cacba"));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
