@@ -16,6 +16,7 @@ __NSA_State::__NSA_State() : chache_changed_(true) {}
 __NSA_State &__NSA_State::add(symbol_t symbol, const_ptr_t state) {
   chache_changed_ = true;
   symbol_map_[symbol].insert(state);
+	return *this;
 }
 
 const __NSA_State::set_t &__NSA_State::get(symbol_t symbol) {

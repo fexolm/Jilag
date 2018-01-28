@@ -34,3 +34,6 @@
 #IDE settings
 .idea/
 cmake-build-debug/
+build/
+tags
+compile_commands.json

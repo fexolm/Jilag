@@ -11,7 +11,14 @@ find_package (Boost COMPONENTS unit_test_framework REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(fsa_test fsa.cpp)
+add_executable(re_test re_test.cpp)
+add_executable(re_test2 re_test2.cpp)
+
 
 target_link_libraries(fsa_test fsa ${Boost_LIBRARIES})
+target_link_libraries(re_test re ${Boost_LIBRARIES})
+target_link_libraries(re_test2 re ${Boost_LIBRARIES})
 
 add_test(fsa_test fsa_test)
+add_test(re_test re_test)
+add_test(re_test2 re_test2)
