@@ -1,0 +1,47 @@
+
+Projects: 
+  Jilag:
+    Todos:
+      ✔ Make TODO file @done(18-02-03 14:41)
+      ☐ Implement codegen library @low
+  libfsa:
+    Todos:
+      ✔ Implement nsa, dsa @done(18-02-04 13:30)
+      ✔ Implement Tomson algorithm @done(18-02-04 13:31)
+      ✔ Remove e-closure @done(18-02-04 13:31)
+      ✔ Translate nsa -> dsa @done(18-02-04 13:31)
+      ✔ dsa copy @done(18-02-04 13:34)
+      ☐ Implement nsa copy @critical
+      ☐ Implement nsa concatenation @high
+      ☐ Allow states to save additional info @high 
+      ☐ Find minimal match prefix @high 
+      ☐ Implement fsa minimization @low
+  libre:
+    Todos:
+      ✔ Implement Recursive descent parser @done(18-02-04 13:35)
+      ✔ Implement regexp -> nsa @done(18-02-04 13:36)
+      ☐ Implement simple regex interface @high 
+      ☐ Regex find @high
+      ☐ Regex replace @low
+  tests:
+    Todos:
+      ✔ Test nsa -> dsa @done(18-02-04 13:33)
+      ✔ Test regexp -> nsa -> dsa @done(18-02-04 13:33)
+      ☐ Refactor tests @low
+
+Documentation:
+  Todos:
+    ✔ Start documentation @critical @done(18-02-03 17:31)
+    libfsa:
+      ☐ about fsa (nsa, dsa) @high @today 
+      ☐ fsa possible implementations @high @today 
+      ☐ my fsa implementation @high @today 
+      ☐ how to remove e-closure @high @today 
+      ☐ how to translate nsa -> dsa @high @today 
+      ☐ how to minimize dsa @high @today 
+    libre:
+      ☐ what is regexp @high 
+      ☐ Tomson algorithm @high
+      ☐ Recursive descent parser @high
+    codegen:
+
