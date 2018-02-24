@@ -19,7 +19,7 @@ bool check_string(jilag::DSA &dsa, const std::string &str) {
 BOOST_AUTO_TEST_SUITE(re_test1)
 
 BOOST_AUTO_TEST_CASE (test1) {
-	std::string s = "abc(kek|lel)*";
+  std::string s = "abc(kek|lel)*";
   std::stringstream ss;
   ss << s;
   Parser2 p;

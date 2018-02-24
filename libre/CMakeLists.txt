@@ -12,6 +12,6 @@ include_directories(include)
 
 include_directories(${CMAKE_SOURCE_DIR}/libfsa/include)
 
-add_library(${PROJECT_NAME} STATIC ${PUBLIC_HEADERS} ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${PUBLIC_HEADERS} ${SOURCES} Regex.cpp include/Regex.hpp)
 
 target_link_libraries(${PROJECT_NAME} fsa)
