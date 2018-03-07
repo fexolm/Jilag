@@ -22,21 +22,24 @@ public:
   typedef const ptr_t const_ptr_t;
   typedef std::unordered_set<ptr_t> set_t;
   typedef std::unordered_map<symbol_t, set_t> map_t;
-
 private:
   map_t symbol_map_;
   bool final_;
   mutable bool chache_changed_;
   mutable std::set<symbol_t> possible_symbols_chache_;
+	void *state_data_;
 public:
+	int priority;
   __NSA_State();
   __NSA_State &add(symbol_t, const_ptr_t);
   const set_t &get(symbol_t);
-  void make_final();
-  bool final() const;
+  void make_final() noexcept;
+  bool final() const noexcept;
   void remove_epsilons();
-  const std::set<symbol_t> &possible_symbols() const;
-  const std::set<__NSA_State *> conneted_with() const;
+  const std::set<symbol_t> &possible_symbols() const noexcept;
+  const std::set<__NSA_State *> conneted_with() const noexcept;
+	const void *state_data() noexcept;
+	void set_data(void *data) noexcept;
 };
 } // namespace __internal
 class NSA {
@@ -57,8 +60,9 @@ public:
   NSA(NSA &&);
   NSA &operator=(NSA &&);
   virtual ~NSA();
-
+	
   NSA &push_back(symbol_t symbol);
+
   NSA &push_back(NSA &&);
 
   NSA &add_union(std::vector<NSA> &v);
@@ -69,6 +73,8 @@ public:
 
   NSA &alternative_branch(NSA &&);
 
+	NSA &change_priority(int priority) noexcept;
+	NSA &change_data(void *data) noexcept;
   __internal::__state_translation_table
   __attribute__((visibility("hidden"))) make_translation_table_() const;
 };

@@ -11,7 +11,7 @@
 
 namespace jilag {
 namespace __internal {
-__NSA_State::__NSA_State() : chache_changed_(true) {}
+__NSA_State::__NSA_State() : chache_changed_(true), state_data_(nullptr) {}
 
 __NSA_State &__NSA_State::add(symbol_t symbol, const_ptr_t state) {
   chache_changed_ = true;
@@ -54,15 +54,23 @@ void __NSA_State::remove_epsilons() {
   }
 }
 
-void __NSA_State::make_final() {
+void __NSA_State::make_final() noexcept{
   final_ = true;
 }
 
-bool __NSA_State::final() const {
+bool __NSA_State::final() const noexcept{
   return final_;
 }
 
-const std::set<symbol_t> &__NSA_State::possible_symbols() const {
+const void *__NSA_State::state_data() noexcept{
+	return state_data_;
+}
+
+void __NSA_State::set_data(void *data) noexcept {
+	state_data_ = data;
+}
+
+const std::set<symbol_t> &__NSA_State::possible_symbols() const noexcept{
   if (chache_changed_) {
     chache_changed_ = false;
     possible_symbols_chache_.clear();
@@ -73,7 +81,7 @@ const std::set<symbol_t> &__NSA_State::possible_symbols() const {
   return possible_symbols_chache_;
 }
 
-const std::set<__NSA_State *> __NSA_State::conneted_with() const {
+const std::set<__NSA_State *> __NSA_State::conneted_with() const noexcept{
   std::set<__NSA_State *> result;
   for (auto s : symbol_map_) {
     result.insert(s.second.begin(), s.second.end());
@@ -191,7 +199,9 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
   __internal::__IndexTree used;
   std::vector<std::vector<state_t *>> states;
   std::vector<std::map<symbol_t, int>> ksa_table;
+	std::vector<std::pair<int, const void *>> states_data;
   states.push_back({begin_});
+	states_data.push_back({begin_->priority, begin_->state_data()});
   used.get_index({begin_}); //x0
   ksa_table.push_back(std::map<symbol_t, int>());
   std::set<int> finals;
@@ -219,6 +229,8 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
         }
       }
       std::vector<__internal::__NSA_State::ptr_t> nstate_v(nstate.begin(), nstate.end());
+			
+			
       int index = used.get_index(nstate_v);
       if (index==states.size()) {
         if (final) {
@@ -226,7 +238,17 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
         }
         states.push_back(nstate_v);
         ksa_table.push_back(std::map<symbol_t, int>());
+				states_data.push_back({99999, nullptr});
       }
+
+			auto best = std::min_element(nstate_v.begin(),nstate_v.end(),
+				 	[](auto lhs, auto rhs) {
+						return lhs->priority < rhs->priority;
+			});
+
+			states_data[index] = std::min(states_data[index], 
+					{(*best)->priority, (*best)->state_data()});
+
       ksa_table[current][symbol] = index;
     }
     current++;
@@ -268,4 +290,17 @@ NSA &NSA::alternative_branch(NSA &&nsa) {
   return *this;
 }
 
+NSA &NSA::change_priority(int priority) noexcept {
+	for(auto s : states_) {
+		s->priority = priority;
+	}
+	return *this;
+}
+
+NSA &NSA::change_data(void *data) noexcept {
+	for(auto s : states_) {
+		s->set_data(data);
+	}
+	return *this;
+}
 } // namespace jilag

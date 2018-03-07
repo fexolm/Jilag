@@ -11,6 +11,7 @@ namespace __internal {
 struct __state_translation_table {
   std::set<int> finals;
   std::vector<std::map<int, int>> states;
+	std::vector<void *> states_data;
 };
 }
 }
