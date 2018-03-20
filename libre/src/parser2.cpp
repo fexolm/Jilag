@@ -3,9 +3,11 @@
 //
 
 #include "parser2.hpp"
-jilag::DSA Parser2::parse(std::istream &in) {
+jilag::DSA Parser2::parse(std::istream &in, void *data) {
   jilag::NSA nsa;
   stmt(in, nsa);
+  nsa.change_data(data);
+  nsa.change_priority(0);
   nsa.remove_epsilons();
   auto table = nsa.make_translation_table_();
   auto dsa = jilag::DSA::build_from_nsa(nsa);
@@ -26,8 +28,7 @@ void Parser2::expr(std::istream &in, jilag::NSA &nsa) {
   switch (c) {
   __term__case__ term(in, nsa);
     break;
-  __open__paren__case__
-    in.get();
+  __open__paren__case__ in.get();
     complex_expr(in, nsa);
     if (in.get()!=CLOSE_PAREN)
       throw;

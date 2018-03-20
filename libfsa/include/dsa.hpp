@@ -15,6 +15,7 @@ private:
   bool final_;
   mutable bool cache_valid_;
   mutable std::unordered_set<int> symbol_cache_;
+  void *data_;
   std::unordered_map<int, __DSA_State *> symbol_map_;
 public:
   __DSA_State();
@@ -22,6 +23,8 @@ public:
   __DSA_State *from_symbol(int s);
   const std::unordered_set<int> &symbols() const;
   void add_symbol(int s, __DSA_State *state);
+  void *data();
+  void set_data(void *data);
 };
 }
 
@@ -47,5 +50,7 @@ public:
   bool final() const;
 
   void reset();
+  void *data();
+
 };
 }

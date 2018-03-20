@@ -54,23 +54,23 @@ void __NSA_State::remove_epsilons() {
   }
 }
 
-void __NSA_State::make_final() noexcept{
+void __NSA_State::make_final() noexcept {
   final_ = true;
 }
 
-bool __NSA_State::final() const noexcept{
+bool __NSA_State::final() const noexcept {
   return final_;
 }
 
-const void *__NSA_State::state_data() noexcept{
-	return state_data_;
+void *__NSA_State::state_data() noexcept {
+  return state_data_;
 }
 
 void __NSA_State::set_data(void *data) noexcept {
-	state_data_ = data;
+  state_data_ = data;
 }
 
-const std::set<symbol_t> &__NSA_State::possible_symbols() const noexcept{
+const std::set<symbol_t> &__NSA_State::possible_symbols() const noexcept {
   if (chache_changed_) {
     chache_changed_ = false;
     possible_symbols_chache_.clear();
@@ -81,7 +81,7 @@ const std::set<symbol_t> &__NSA_State::possible_symbols() const noexcept{
   return possible_symbols_chache_;
 }
 
-const std::set<__NSA_State *> __NSA_State::conneted_with() const noexcept{
+const std::set<__NSA_State *> __NSA_State::conneted_with() const noexcept {
   std::set<__NSA_State *> result;
   for (auto s : symbol_map_) {
     result.insert(s.second.begin(), s.second.end());
@@ -199,9 +199,9 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
   __internal::__IndexTree used;
   std::vector<std::vector<state_t *>> states;
   std::vector<std::map<symbol_t, int>> ksa_table;
-	std::vector<std::pair<int, const void *>> states_data;
+  std::vector<std::pair<int, void *>> states_data;
   states.push_back({begin_});
-	states_data.push_back({begin_->priority, begin_->state_data()});
+  states_data.push_back({begin_->priority, begin_->state_data()});
   used.get_index({begin_}); //x0
   ksa_table.push_back(std::map<symbol_t, int>());
   std::set<int> finals;
@@ -229,8 +229,7 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
         }
       }
       std::vector<__internal::__NSA_State::ptr_t> nstate_v(nstate.begin(), nstate.end());
-			
-			
+
       int index = used.get_index(nstate_v);
       if (index==states.size()) {
         if (final) {
@@ -238,16 +237,16 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
         }
         states.push_back(nstate_v);
         ksa_table.push_back(std::map<symbol_t, int>());
-				states_data.push_back({99999, nullptr});
+        states_data.push_back({99999, nullptr});
       }
 
-			auto best = std::min_element(nstate_v.begin(),nstate_v.end(),
-				 	[](auto lhs, auto rhs) {
-						return lhs->priority < rhs->priority;
-			});
+      auto best = std::min_element(nstate_v.begin(), nstate_v.end(),
+                                   [](auto lhs, auto rhs) {
+                                     return lhs->priority < rhs->priority;
+                                   });
 
-			states_data[index] = std::min(states_data[index], 
-					{(*best)->priority, (*best)->state_data()});
+      states_data[index] = std::min(states_data[index],
+                                    {(*best)->priority, (*best)->state_data()});
 
       ksa_table[current][symbol] = index;
     }
@@ -256,6 +255,12 @@ __internal::__state_translation_table NSA::make_translation_table_() const {
   __internal::__state_translation_table result;
   result.states = std::move(ksa_table);
   result.finals = std::move(finals);
+
+  std::transform(states_data.begin(), states_data.end(),
+                 std::back_inserter(result.states_data), [](const auto &sd) {
+        return sd.second;
+      });
+
   return result;
 }
 
@@ -291,16 +296,16 @@ NSA &NSA::alternative_branch(NSA &&nsa) {
 }
 
 NSA &NSA::change_priority(int priority) noexcept {
-	for(auto s : states_) {
-		s->priority = priority;
-	}
-	return *this;
+  for (auto s : states_) {
+    s->priority = priority;
+  }
+  return *this;
 }
 
 NSA &NSA::change_data(void *data) noexcept {
-	for(auto s : states_) {
-		s->set_data(data);
-	}
-	return *this;
+  for (auto s : states_) {
+    s->set_data(data);
+  }
+  return *this;
 }
 } // namespace jilag

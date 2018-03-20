@@ -38,6 +38,12 @@ void __DSA_State::add_symbol(int s, __DSA_State *state) {
 
 __DSA_State::__DSA_State()
     : final_(false), cache_valid_(false) {}
+void *__DSA_State::data() {
+  return data_;
+}
+void __DSA_State::set_data(void *data) {
+  data_ = data;
+}
 
 } // namespace __internal
 
@@ -68,6 +74,7 @@ DSA DSA::build_from_nsa(const NSA &nsa) {
     for (auto p : table.states[i]) {
       states[i]->add_symbol(p.first, states[p.second]);
     }
+    states[i]->set_data(table.states_data[i]);
   }
   for (auto f : table.finals) {
     states[f]->final() = true;
@@ -120,5 +127,8 @@ void DSA::dfs_copy(std::map<intptr_t, state_t *> &used, DSA::state_t *start) con
     dfs_copy(used, to);
     state->add_symbol(sy, used[reinterpret_cast<intptr_t >(to)]);
   }
+}
+void *DSA::data() {
+  return current_->data();
 }
 } // namespace jilag

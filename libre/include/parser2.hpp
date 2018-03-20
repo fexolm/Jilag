@@ -26,7 +26,7 @@
 
 class Parser2 {
 public:
-  jilag::DSA parse(std::istream &in);
+  jilag::DSA parse(std::istream &in, void *data = nullptr);
 private:
   void stmt(std::istream &in, jilag::NSA &);
   void expr(std::istream &in, jilag::NSA &);

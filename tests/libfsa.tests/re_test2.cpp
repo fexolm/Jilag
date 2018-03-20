@@ -3,8 +3,6 @@
 //
 
 #include <boost/test/unit_test.hpp>
-#include <string>
-#include <sstream>
 #include "parser2.hpp"
 
 bool check_string(jilag::DSA &dsa, const std::string &str) {

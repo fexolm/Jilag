@@ -38,7 +38,7 @@ public:
   void remove_epsilons();
   const std::set<symbol_t> &possible_symbols() const noexcept;
   const std::set<__NSA_State *> conneted_with() const noexcept;
-	const void *state_data() noexcept;
+	void *state_data() noexcept;
 	void set_data(void *data) noexcept;
 };
 } // namespace __internal
