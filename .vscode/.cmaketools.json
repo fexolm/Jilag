@@ -1,5 +1,486 @@
 {
-  "variant": null,
+  "variant": {
+    "label": "Debug",
+    "keywordSettings": {
+      "buildType": "debug"
+    },
+    "description": "Emit debug information without performing optimizations"
+  },
   "activeEnvironments": [],
-  "codeModel": null
+  "codeModel": {
+    "configurations": [
+      {
+        "name": "Debug",
+        "projects": [
+          {
+            "buildDirectory": "/home/fexolm/git/Jilag/build",
+            "name": "Jilag",
+            "sourceDirectory": "/home/fexolm/git/Jilag",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/re_test3"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "re_test3.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "re_test3",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libre/libre.a /usr/lib/libboost_unit_test_framework.so ../../libfsa/libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "re_test3",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/re_test2"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "re_test2.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "re_test2",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libre/libre.a /usr/lib/libboost_unit_test_framework.so ../../libfsa/libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "re_test2",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/libfsa/libfsa.a"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/libfsa",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/dsa.cpp",
+                      "src/index_tree.cpp",
+                      "src/nsa.cpp"
+                    ]
+                  },
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "include/dsa.hpp",
+                      "include/index_tree.hpp",
+                      "include/nsa.hpp",
+                      "include/state_transition_table.hpp"
+                    ]
+                  }
+                ],
+                "fullName": "libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "fsa",
+                "sourceDirectory": "/home/fexolm/git/Jilag/libfsa",
+                "type": "STATIC_LIBRARY"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/fsa_test"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "fsa.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "fsa_test",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libfsa/libfsa.a /usr/lib/libboost_unit_test_framework.so",
+                "linkerLanguage": "CXX",
+                "name": "fsa_test",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/re_test"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "re_test.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "re_test",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libre/libre.a /usr/lib/libboost_unit_test_framework.so ../../libfsa/libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "re_test",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/libre/libre.a"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/libre",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/parser.cpp",
+                      "src/parser2.cpp",
+                      "Regex.cpp"
+                    ]
+                  },
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "include/Regex.hpp",
+                      "include/lex_cases.hpp",
+                      "include/lex_constants.hpp",
+                      "include/parser.hpp",
+                      "include/parser2.hpp"
+                    ]
+                  }
+                ],
+                "fullName": "libre.a",
+                "linkerLanguage": "CXX",
+                "name": "re",
+                "sourceDirectory": "/home/fexolm/git/Jilag/libre",
+                "type": "STATIC_LIBRARY"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "/home/fexolm/git/Jilag/build/libfsa",
+            "name": "fsa",
+            "sourceDirectory": "/home/fexolm/git/Jilag/libfsa",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/libfsa/libfsa.a"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/libfsa",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/dsa.cpp",
+                      "src/index_tree.cpp",
+                      "src/nsa.cpp"
+                    ]
+                  },
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "include/dsa.hpp",
+                      "include/index_tree.hpp",
+                      "include/nsa.hpp",
+                      "include/state_transition_table.hpp"
+                    ]
+                  }
+                ],
+                "fullName": "libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "fsa",
+                "sourceDirectory": "/home/fexolm/git/Jilag/libfsa",
+                "type": "STATIC_LIBRARY"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+            "name": "libfsa.test",
+            "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/re_test3"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "re_test3.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "re_test3",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libre/libre.a /usr/lib/libboost_unit_test_framework.so ../../libfsa/libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "re_test3",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/re_test2"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "re_test2.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "re_test2",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libre/libre.a /usr/lib/libboost_unit_test_framework.so ../../libfsa/libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "re_test2",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/fsa_test"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "fsa.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "fsa_test",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libfsa/libfsa.a /usr/lib/libboost_unit_test_framework.so",
+                "linkerLanguage": "CXX",
+                "name": "fsa_test",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              },
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/tests/libfsa.tests/re_test"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/tests/libfsa.tests",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "defines": [
+                      "BOOST_TEST_DYN_LINK",
+                      "BOOST_TEST_MAIN"
+                    ],
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "re_test.cpp"
+                    ]
+                  }
+                ],
+                "fullName": "re_test",
+                "linkLanguageFlags": "-g",
+                "linkLibraries": "../../libre/libre.a /usr/lib/libboost_unit_test_framework.so ../../libfsa/libfsa.a",
+                "linkerLanguage": "CXX",
+                "name": "re_test",
+                "sourceDirectory": "/home/fexolm/git/Jilag/tests/libfsa.tests",
+                "type": "EXECUTABLE"
+              }
+            ]
+          },
+          {
+            "buildDirectory": "/home/fexolm/git/Jilag/build/libre",
+            "name": "re",
+            "sourceDirectory": "/home/fexolm/git/Jilag/libre",
+            "targets": [
+              {
+                "artifacts": [
+                  "/home/fexolm/git/Jilag/build/libre/libre.a"
+                ],
+                "buildDirectory": "/home/fexolm/git/Jilag/build/libre",
+                "fileGroups": [
+                  {
+                    "compileFlags": "-g   -std=gnu++14",
+                    "includePath": [
+                      {
+                        "path": "/home/fexolm/git/Jilag/libre/include"
+                      },
+                      {
+                        "path": "/home/fexolm/git/Jilag/libfsa/include"
+                      }
+                    ],
+                    "isGenerated": false,
+                    "language": "CXX",
+                    "sources": [
+                      "src/parser.cpp",
+                      "src/parser2.cpp",
+                      "Regex.cpp"
+                    ]
+                  },
+                  {
+                    "isGenerated": false,
+                    "sources": [
+                      "include/Regex.hpp",
+                      "include/lex_cases.hpp",
+                      "include/lex_constants.hpp",
+                      "include/parser.hpp",
+                      "include/parser2.hpp"
+                    ]
+                  }
+                ],
+                "fullName": "libre.a",
+                "linkerLanguage": "CXX",
+                "name": "re",
+                "sourceDirectory": "/home/fexolm/git/Jilag/libre",
+                "type": "STATIC_LIBRARY"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "cookie": "0.30114615162613156",
+    "inReplyTo": "codemodel",
+    "type": "reply"
+  }
 }
