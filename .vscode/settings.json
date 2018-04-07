@@ -3,5 +3,26 @@
         "unordered_set": "cpp",
         "sstream": "cpp"
     },
-    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+    "C_Cpp.intelliSenseEngineFallback": "Disabled",
+    "todo.tags.names": [
+        "critical",
+        "high",
+        "low",
+        "today",
+        "freeze"
+    ],
+    "todo.tags.backgroundColors": [
+        "#e54545",
+        "#e59f45",
+        "#e5d145",
+        "#ae81ff",
+        "#ffffff"
+    ],
+    "todo.tags.foregroundColors": [
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000",
+        "#000000"
+      ],
 }

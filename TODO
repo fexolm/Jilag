@@ -2,17 +2,17 @@
 Projects: 
   Jilag:
     Todos:
-      ☐ Implement codegen library @low
+      ☐ Implement codegen library @critical 
   libfsa:
     Todos:
-      ☐ Implement nsa copy @critical
-      ☐ Implement nsa concatenation @high
-      ☐ Find minimal match prefix @high 
-      ☐ Implement fsa minimization @low
+      ☐ Implement nsa copy @freeze
+      ☐ Implement nsa concatenation @freeze
+      ☐ Find minimal match prefix  @freeze
+      ☐ Implement fsa minimization  @freeze
   libre:
     Todos:
-      ☐ Regex find @high
-      ☐ Regex replace @low
+      ☐ Regex find @freeze
+      ☐ Regex replace @freeze
   tests:
     Todos:
 
